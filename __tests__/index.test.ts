@@ -20,15 +20,13 @@ afterEach(() => {
     });
 })
 
-test('Without input', () => {
-    const noInputMock = jest.spyOn(core, 'setOutput');
-    run();
-    expect(noInputMock).toHaveBeenCalledWith('greeting', 'Hello World');
-});
-
-test('With input', () => {
-    process.env['INPUT_WHO-TO-GREET'] = "You";
-    const inputMock = jest.spyOn(core, 'setOutput');
-    run();
-    expect(inputMock).toHaveBeenCalledWith('greeting', 'Hello You');
+describe('Test output', () => {
+    
+    test('Output gets called', () => {
+        const noInputMock = jest.spyOn(core, 'setOutput');
+        run()
+        .then(() => {
+            expect(noInputMock).toHaveBeenCalled();
+        });
+    });
 });

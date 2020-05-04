@@ -37,12 +37,43 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 var core = require("@actions/core");
+var rest_1 = require("@octokit/rest");
+var formatVersion = function (tagName) {
+    var version = { tag: "", major: 0, minor: 0, patch: 0, manifestSafeVersionString: "" };
+    version.tag = tagName;
+    var regex = /[^0-9.]/;
+    var numbers = tagName.replace(regex, '').split('.');
+    version.major = parseInt(numbers[0]);
+    version.minor = parseInt(numbers[1]);
+    version.patch = parseInt(numbers[2]);
+    version.manifestSafeVersionString =
+        version.major.toString().padStart(2, '0') +
+            '.' +
+            version.minor.toString().padStart(2, '0') +
+            '.' +
+            version.patch.toString().padStart(2, '0');
+    return version;
+};
 var run = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var who;
+    var owner, repoName, octokit;
     return __generator(this, function (_a) {
-        who = core.getInput('who-to-greet');
-        console.log("Hello " + who);
-        core.setOutput('greeting', "Hello " + who);
+        owner = core.getInput('owner');
+        repoName = core.getInput('repo');
+        console.log(owner, repoName);
+        octokit = new rest_1.Octokit({
+            auth: '',
+            userAgent: 'dnn-platform-get-version'
+        });
+        octokit.repos.getLatestRelease({
+            owner: owner,
+            repo: repoName
+        })
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            .then(function (fullfilled) {
+            // Outputs
+            var version = formatVersion(fullfilled.data.tag_name);
+            core.setOutput('version', version);
+        });
         return [2 /*return*/];
     });
 }); };

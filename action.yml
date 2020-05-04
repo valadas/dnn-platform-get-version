@@ -1,13 +1,17 @@
-name: 'Hello World'
-description: 'Says hi simply'
+name: 'dnn-platform-get-version'
+description: 'Fetches the latest official Dnn.Plaform release version'
 inputs:
-  who-to-greet: # id of input
-    description: 'Who to greet'
+  owner:
+    description: repository owner, defaults to dnnsoftware
     required: false
-    default: 'World'
+    default: 'dnnsoftware'
+  repo:
+    description: repository name, defaults to Dnn.Platform
+    required: false
+    default: 'Dnn.Platform'
 outputs:
-  greeting: #id of output
-    description: 'The greeting'
+  version: #id of output
+    description: 'The version information, contains: tag, major, minor, patch and manifestSafeVersionString'
 runs:
   using: 'node12'
   main: './dist/index.js'
