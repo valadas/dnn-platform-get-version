@@ -15,10 +15,10 @@
 Example:
 ```json
 {
-    tag: 'v9.6.0',
-    major: 9,
-    minor: 6,
-    patch: 0,
-    manifestSafeVersionString: '09.06.00'
+    "tag": "v9.6.0",
+    "major": 9,
+    "minor": 6,
+    "patch": 0,
+    "manifestSafeVersionString": "09.06.00"
 }
 ```
