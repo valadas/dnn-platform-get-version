@@ -41,7 +41,11 @@ const run = async(): Promise<void> => {
     .then((fullfilled: any) => {
         // Outputs
         const version: Version = formatVersion(fullfilled.data.tag_name);
-        core.setOutput('version', version);
+        core.setOutput('tag', version.tag);
+        core.setOutput('major', version.major);
+        core.setOutput('minor', version.minor);
+        core.setOutput('patch', version.patch);
+        core.setOutput('manifestSafeVersionString', version.manifestSafeVersionString);
     })
 
 }

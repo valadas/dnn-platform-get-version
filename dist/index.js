@@ -79,7 +79,11 @@ var run = function () { return __awaiter(void 0, void 0, void 0, function () {
             .then(function (fullfilled) {
             // Outputs
             var version = formatVersion(fullfilled.data.tag_name);
-            core.setOutput('version', version);
+            core.setOutput('tag', version.tag);
+            core.setOutput('major', version.major);
+            core.setOutput('minor', version.minor);
+            core.setOutput('patch', version.patch);
+            core.setOutput('manifestSafeVersionString', version.manifestSafeVersionString);
         });
         return [2 /*return*/];
     });
