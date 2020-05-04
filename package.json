@@ -21,27 +21,5 @@
   "bugs": {
     "url": "https://github.com/valadas/dnn-platform-get-version/issues"
   },
-  "homepage": "https://github.com/valadas/dnn-platform-get-version#readme",
-  "devDependencies": {
-    "@actions/core": "^1.2.4",
-    "@octokit/rest": "^17.6.0",
-    "@types/jest": "^25.2.1",
-    "@types/js-yaml": "^3.12.3",
-    "@types/node": "^13.13.4",
-    "@typescript-eslint/eslint-plugin": "^2.30.0",
-    "@typescript-eslint/parser": "^2.30.0",
-    "@zeit/ncc": "^0.22.1",
-    "eslint": "^6.8.0",
-    "jest": "^25.5.4",
-    "js-yaml": "^3.13.1",
-    "rollup": "^2.7.6",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "ts-jest": "^25.4.0",
-    "typescript": "^3.8.3"
-  },
-  "dependencies": {
-    "@rollup/plugin-typescript": "^4.1.1",
-    "actions-toolkit": "^4.0.0"
-  }
+  "homepage": "https://github.com/valadas/dnn-platform-get-version#readme"
 }
