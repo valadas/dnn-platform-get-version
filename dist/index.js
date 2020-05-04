@@ -1005,7 +1005,7 @@
       return true;
     }
 
-    var D__websites_dnnPlatformGetVersion_node_modules_nodeFetch_lib = createCommonjsModule(function (module, exports) {
+    var lib = createCommonjsModule(function (module, exports) {
 
     Object.defineProperty(exports, '__esModule', { value: true });
 
@@ -2649,11 +2649,11 @@
     exports.FetchError = FetchError;
     });
 
-    var nodeFetch = unwrapExports(D__websites_dnnPlatformGetVersion_node_modules_nodeFetch_lib);
-    var D__websites_dnnPlatformGetVersion_node_modules_nodeFetch_lib_1 = D__websites_dnnPlatformGetVersion_node_modules_nodeFetch_lib.Headers;
-    var D__websites_dnnPlatformGetVersion_node_modules_nodeFetch_lib_2 = D__websites_dnnPlatformGetVersion_node_modules_nodeFetch_lib.Request;
-    var D__websites_dnnPlatformGetVersion_node_modules_nodeFetch_lib_3 = D__websites_dnnPlatformGetVersion_node_modules_nodeFetch_lib.Response;
-    var D__websites_dnnPlatformGetVersion_node_modules_nodeFetch_lib_4 = D__websites_dnnPlatformGetVersion_node_modules_nodeFetch_lib.FetchError;
+    var nodeFetch = unwrapExports(lib);
+    var lib_1 = lib.Headers;
+    var lib_2 = lib.Request;
+    var lib_3 = lib.Response;
+    var lib_4 = lib.FetchError;
 
     class Deprecation extends Error {
       constructor(message) {
@@ -2910,133 +2910,9 @@
         },
     });
 
-    const VERSION$2 = "5.4.2";
-
-    function getBufferResponse$1(response) {
-        return response.arrayBuffer();
-    }
-
-    function fetchWrapper$1(requestOptions) {
-        if (isPlainObject$1(requestOptions.body) ||
-            Array.isArray(requestOptions.body)) {
-            requestOptions.body = JSON.stringify(requestOptions.body);
-        }
-        let headers = {};
-        let status;
-        let url;
-        const fetch = (requestOptions.request && requestOptions.request.fetch) || nodeFetch;
-        return fetch(requestOptions.url, Object.assign({
-            method: requestOptions.method,
-            body: requestOptions.body,
-            headers: requestOptions.headers,
-            redirect: requestOptions.redirect,
-        }, requestOptions.request))
-            .then((response) => {
-            url = response.url;
-            status = response.status;
-            for (const keyAndValue of response.headers) {
-                headers[keyAndValue[0]] = keyAndValue[1];
-            }
-            if (status === 204 || status === 205) {
-                return;
-            }
-            // GitHub API returns 200 for HEAD requests
-            if (requestOptions.method === "HEAD") {
-                if (status < 400) {
-                    return;
-                }
-                throw new RequestError(response.statusText, status, {
-                    headers,
-                    request: requestOptions,
-                });
-            }
-            if (status === 304) {
-                throw new RequestError("Not modified", status, {
-                    headers,
-                    request: requestOptions,
-                });
-            }
-            if (status >= 400) {
-                return response
-                    .text()
-                    .then((message) => {
-                    const error = new RequestError(message, status, {
-                        headers,
-                        request: requestOptions,
-                    });
-                    try {
-                        let responseBody = JSON.parse(error.message);
-                        Object.assign(error, responseBody);
-                        let errors = responseBody.errors;
-                        // Assumption `errors` would always be in Array format
-                        error.message =
-                            error.message + ": " + errors.map(JSON.stringify).join(", ");
-                    }
-                    catch (e) {
-                        // ignore, see octokit/rest.js#684
-                    }
-                    throw error;
-                });
-            }
-            const contentType = response.headers.get("content-type");
-            if (/application\/json/.test(contentType)) {
-                return response.json();
-            }
-            if (!contentType || /^text\/|charset=utf-8$/.test(contentType)) {
-                return response.text();
-            }
-            return getBufferResponse$1(response);
-        })
-            .then((data) => {
-            return {
-                status,
-                url,
-                headers,
-                data,
-            };
-        })
-            .catch((error) => {
-            if (error instanceof RequestError) {
-                throw error;
-            }
-            throw new RequestError(error.message, 500, {
-                headers,
-                request: requestOptions,
-            });
-        });
-    }
-
-    function withDefaults$2(oldEndpoint, newDefaults) {
-        const endpoint = oldEndpoint.defaults(newDefaults);
-        const newApi = function (route, parameters) {
-            const endpointOptions = endpoint.merge(route, parameters);
-            if (!endpointOptions.request || !endpointOptions.request.hook) {
-                return fetchWrapper$1(endpoint.parse(endpointOptions));
-            }
-            const request = (route, parameters) => {
-                return fetchWrapper$1(endpoint.parse(endpoint.merge(route, parameters)));
-            };
-            Object.assign(request, {
-                endpoint,
-                defaults: withDefaults$2.bind(null, endpoint),
-            });
-            return endpointOptions.request.hook(request, endpointOptions);
-        };
-        return Object.assign(newApi, {
-            endpoint,
-            defaults: withDefaults$2.bind(null, endpoint),
-        });
-    }
-
-    const request$1 = withDefaults$2(endpoint, {
-        headers: {
-            "user-agent": `octokit-request.js/${VERSION$2} ${getUserAgent()}`,
-        },
-    });
-
     var distWeb = /*#__PURE__*/Object.freeze({
         __proto__: null,
-        request: request$1
+        request: request
     });
 
     function getUserAgent$1() {
@@ -3188,7 +3064,7 @@
         });
     };
 
-    const VERSION$3 = "2.5.0";
+    const VERSION$2 = "2.5.0";
 
     class Octokit {
         constructor(options = {}) {
@@ -3207,7 +3083,7 @@
             // prepend default user agent with `options.userAgent` if set
             requestDefaults.headers["user-agent"] = [
                 options.userAgent,
-                `octokit-core.js/${VERSION$3} ${getUserAgent()}`,
+                `octokit-core.js/${VERSION$2} ${getUserAgent()}`,
             ]
                 .filter(Boolean)
                 .join(" ");
@@ -3308,10 +3184,10 @@
             return NewOctokit;
         }
     }
-    Octokit.VERSION = VERSION$3;
+    Octokit.VERSION = VERSION$2;
     Octokit.plugins = [];
 
-    const VERSION$4 = "1.0.0";
+    const VERSION$3 = "1.0.0";
 
     /**
      * @param octokit Octokit instance
@@ -3335,9 +3211,9 @@
             });
         });
     }
-    requestLog.VERSION = VERSION$4;
+    requestLog.VERSION = VERSION$3;
 
-    const VERSION$5 = "2.2.0";
+    const VERSION$4 = "2.2.0";
 
     /**
      * Some “list” response that can be paginated have a different response structure
@@ -3443,7 +3319,7 @@
             }),
         };
     }
-    paginateRest.VERSION = VERSION$5;
+    paginateRest.VERSION = VERSION$4;
 
     const Endpoints = {
         actions: {
@@ -4772,7 +4648,7 @@
         },
     };
 
-    const VERSION$6 = "3.8.0";
+    const VERSION$5 = "3.8.0";
 
     function endpointsToMethods(octokit, endpointsMap) {
         const newMethods = {};
@@ -4854,12 +4730,12 @@
     function restEndpointMethods(octokit) {
         return endpointsToMethods(octokit, Endpoints);
     }
-    restEndpointMethods.VERSION = VERSION$6;
+    restEndpointMethods.VERSION = VERSION$5;
 
-    const VERSION$7 = "17.6.0";
+    const VERSION$6 = "17.6.0";
 
     const Octokit$1 = Octokit.plugin(requestLog, restEndpointMethods, paginateRest).defaults({
-        userAgent: `octokit-rest.js/${VERSION$7}`,
+        userAgent: `octokit-rest.js/${VERSION$6}`,
     });
 
     const formatVersion = (tagName) => {
