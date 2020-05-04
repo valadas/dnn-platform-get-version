@@ -5,7 +5,7 @@
 **repo**: The repository name (optional), defaults to Dnn.Platform
 
 ### outputs
-**version** An object containing the following properties
+This action returns primitive outputs to represent the latest released version
 * tag: string representing the latest tag
 * major: number representing the major version
 * minor: number representing the minor version
@@ -13,12 +13,10 @@
 * manifestSafeVersionString: A string that is save to use in manifest version numbers.
 
 Example:
-```json
-{
-    "tag": "v9.6.0",
-    "major": 9,
-    "minor": 6,
-    "patch": 0,
-    "manifestSafeVersionString": "09.06.00"
-}
+```
+tag: "v9.6.0"
+major: 9
+minor: 6
+patch: 0
+manifestSafeVersionString: "09.06.00"
 ```

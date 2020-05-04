@@ -10,8 +10,16 @@ inputs:
     required: false
     default: 'Dnn.Platform'
 outputs:
-  version: #id of output
-    description: 'The version information, contains: tag, major, minor, patch and manifestSafeVersionString'
+  tag:
+    description: 'The tag of the latest release ex: v9.6.0'
+  major:
+    description: 'The major version number ex: 9 for v9.6.0'
+  minor:
+    description: 'The minor version number ex: 6 for v9.6.0'
+  patch:
+    description: 'The patch version number ex: 0 for v9.6.0'
+  manifestSafeVersionString:
+    description: 'A string representation of the version number safe to use in Dnn manifests. Ex 09.06.00 for v9.6.0'
 runs:
   using: 'node12'
   main: './dist/index.js'
