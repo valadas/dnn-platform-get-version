@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/valadas/dnn-platform-get-version#readme",
   "dependencies": {
-    "@actions/core": "^1.2.4",
+    "@actions/core": "^1.9.1",
     "@octokit/rest": "^17.6.0"
   }
 }
